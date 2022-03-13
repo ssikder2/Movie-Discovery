@@ -1,16 +1,18 @@
 # Movie Discovery - Shams Sikder
 
-This is a web app to show my favorite movies and link to their wikipedia pages. The data is retrieved dynamically through the use of third-party APIs from Wikipedia and TheMovieDataBase. This app also has a signup and login functionality. It also allows the users to to leave reviews for the movies. This is done through the use of postgresql databases.
+This is a web app to show my favorite movies and link to their wikipedia pages. The data is retrieved dynamically through the use of third-party APIs from Wikipedia and TheMovieDataBase. This app also has a signup and login functionality. It also allows the users to to leave reviews for the movies. This is done through the use of postgresql databases. There is also a page where you can edit and delete comments built on a react framework.
 
 ## Technologies
 
 1. Python
 2. HTML
 3. CSS
+4. Javascript
 
 ## Frameworks
 
 1. Flask
+2. React
 
 ## Libraries
 
@@ -33,18 +35,17 @@ This is a web app to show my favorite movies and link to their wikipedia pages. 
 
 ## Setup
 
-Anyone trying to fork this project will need to pip install Flask, requests, python-dotenv, flask_login, flask_wtf, flask_bcrypt, wtforms, email_validator, psycopg2-binary, and Flask-SQLAlchemy==2.1. Additionally, an API key is needed from TMDB and substituted in for "TMDB_KEY" in order to retreive the data.
+Anyone trying to fork this project will need to pip install Flask, requests, python-dotenv, flask_login, flask_wtf, flask_bcrypt, wtforms, email_validator, psycopg2-binary, and Flask-SQLAlchemy==2.1. Additionally, an API key is needed from TMDB and substituted in for "TMDB_KEY" in order to retreive the data. They will also have to install react.
 
-## Heroku
-
-This web app was deployed on heroku which can be accessed here: [Movie Discovery](https://shamsmovie.herokuapp.com/)
-
-## Expectation vs. Reality
-
-Overall I expected to work on the user authentication aspect of it first, then work on the user input, and then worry about small details and heroku deployment. Overall, that worked out the way I planned, but I expected the user authentication part to not take as long as it did and looking back, I should have started from the inside elements before addressing the outer ones to be more efficient. 
 
 ## Technical Issues
 
-1. The first technical issue I had was when I set up the database for the login credentials, but everytime I entered the information on the signup page, I would get an error relating to the password field being too long. I understood this was because the password was hashed, so I changed the max length of that column inside the credentials database. That did not change anything and I was getting the same error. I researched the error online and looked at a lot of Stack Overflow links, but they essentially said the same things about increasing the length, but I wasn't sure how to implement that through my tech stack aside from the way I did it. I later realized that in order to update the specifications of a table you must drop the table first. So I dropped the table, ran it again, and it worked.
+1. The first issue I had was that I was not able to connect a react app via a flask app route. I used blueprint and everything but no matter what I did it would say that index.html is not found, even if I ran npm run build. I believe this might be due to the fact that I have an m1 mac but I am not 100% sure. I got around this by running npm start on another terminal and just linking localhost:3000 to my current homepage.
 
-2. Another issue I had was deploying to heroku. I put in everything I thought I needed, and then I remembered there were extra imports compared to milestone 1 so I added those in and it still did not work. I then realized that the config variable for the database was not the same because it was postgres instead of postgresql, and did what the professor said in the discord to do about it. It still did not work which is when I looked at the heroku logs again to see the specific error messages and it essentially said the main.py file was not found. I was confused about this, but then I looked at my milestone 1 files and realized my main file was called main.py. After renaming my app.py to main.py, it finally worked.
+2. The next issue I had was that I could not load the comments specifically for the current user. I tried many different ways directly on the flask app to just send those comments to the react app. I realized that there is no current_user attribute directly on the python file because it does not track the users. I tried doing it directly on the App.js file but I could not find a way to do it.
+
+3. Another issue I had was with my edits. I can create the logic to send the information back to the flask server, but I could not make it so that the input text box would allow me to type in a new rating. The only way I saw around it was to take out the value of the rating, but then it would just be an empty textbox which does not solve the issue.
+
+## Hardest Part of Project
+
+Overall, I think the hardest part of the project was working with React. It's definitely not the most intuitive and it isn't something I'm very used to. It's very different from anything I've worked with so there's a big learning curve. I will say though that it did challenge me in a good way and I definitely learned a lot from it.
