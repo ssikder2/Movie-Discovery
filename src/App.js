@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import React, { useState, useEffect, useRef } from 'react'
+import ReactDOM from 'react-dom';
   
 function App() {
 
@@ -15,13 +16,6 @@ function App() {
     )
   }, [])
 
-  function handleClick() {
-    const val = inputRef.current.value;
-    const newComments = [...comments, val];
-    setComments(newComments);
-    inputRef.current.value = "";
-  }
-
   function handleRemove(id){
     fetch('/comment/'+id, {
       method: 'DELETE',
@@ -31,8 +25,11 @@ function App() {
         }
       })
       setComments(comments.filter(comment => comment.id !== id))
- }
+    }
 
+  function handleRating() {
+    const [rating, setRating] = useState("")
+  }
 
   return (
     <div className="App">
@@ -51,17 +48,19 @@ function App() {
               <td><input
                       type="text"
                       value={val.rating}
-                      onChange={(e) => setInputText(e.target.value)}
                     /></td>
               <td>{val.review}</td>
               <td><button onClick={() => handleRemove(val.id)}>Delete!</button></td>
             </tr>
           )
         })}
-        <button onClick={handleClick}>Save Changes</button>
+        <button>Save Changes</button>
       </table> }
     </div>
   );
 }
+
+ReactDOM.render(<handleRating />, document.getElementById('root'));
+
 
 export default App
