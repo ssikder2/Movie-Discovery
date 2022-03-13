@@ -136,6 +136,16 @@ def homepage():
     wiki = get_wiki_data(data['title'])
     return render_template('ind.html', movie = data, wiki = wiki, reviews = reviews)
 
+bp = Blueprint(
+    "bp",
+    __name__,
+    template_folder="./static/react",
+)
+
+@app.route('/reacts')
+def commentsandratings():
+    return render_template("index.html")
+
 @app.route('/comment/<id>', methods=['DELETE'])
 def delete_comment(id):
   response = {}
@@ -158,6 +168,8 @@ def comments():
         info.append(review_list)
 
     return jsonify(info)
+
+app.register_blueprint(bp)
 
 app.run(
     debug = True
