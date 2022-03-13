@@ -1,9 +1,9 @@
 """"Main file"""
 import os
 from dotenv import find_dotenv, load_dotenv
-from flask import Blueprint, Flask, g, jsonify, redirect, render_template, request, session, url_for
+from flask import Blueprint, Flask, jsonify, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
@@ -144,18 +144,21 @@ bp = Blueprint(
 
 @app.route('/reacts')
 def commentsandratings():
+    """Render React page"""
     return render_template("index.html")
 
 @app.route('/comment/<id>', methods=['DELETE'])
-def delete_comment(id):
-  response = {}
-  review = Reviews.query.get(id)
-  response['id'] = review.id
-  db.session.delete(review)
-  db.session.commit()
+def delete_comment(comment_id):
+    """Delete Comment"""
+    response = {}
+    review = Reviews.query.get(comment_id)
+    response['id'] = review.id
+    db.session.delete(review)
+    db.session.commit()
 
 @app.route("/comments")
 def comments():
+    """Send Comments"""
     reviews = Reviews.query.all()
     info = []
     for i in reviews:
