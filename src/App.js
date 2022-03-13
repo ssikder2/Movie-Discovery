@@ -33,8 +33,6 @@ function App() {
 
   return (
     <div className="App">
-      { <button onClick={() =>  console.log(comments)}>Comments</button> }
-
       { <table>
         <tr>
           <th>Movie ID: </th>
