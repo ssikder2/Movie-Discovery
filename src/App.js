@@ -54,7 +54,7 @@ function App() {
                       onChange={(e) => setInputText(e.target.value)}
                     /></td>
               <td>{val.review}</td>
-              <td><button onClick={() => handleRemove(val.id)}>Delete</button></td>
+              <td><button onClick={() => handleRemove(val.id)}>Delete!</button></td>
             </tr>
           )
         })}
