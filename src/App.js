@@ -54,7 +54,7 @@ function App() {
             </tr>
           )
         })}
-        <button>Save Changes</button>
+        <button onClick={() => alert('Save Succesful!')}>Save Changes</button>
       </table> }
     </div>
   );
