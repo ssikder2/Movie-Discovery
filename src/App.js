@@ -1,17 +1,14 @@
-import userEvent from '@testing-library/user-event';
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
   
-function App() {
+function App(){
 
-  const [comments, setComments] = useState([])
-  const [inputText, setInputText] = useState("");
-
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetch("/comments").then(response =>
       response.json().then(data => {
-        setComments(data)
+        setComments(data);
       })
     )
   }, [])
@@ -24,16 +21,16 @@ function App() {
          'Content-Type' : 'application/json',
         }
       })
-      setComments(comments.filter(comment => comment.id !== id))
+      setComments(comments.filter(comment => comment.id !== id));
     }
 
   function handleRating() {
-    const [rating, setRating] = useState("")
+    const [rating, setRating] = useState("");
   }
 
   return (
     <div className="App">
-      { <table>
+      <table>
         <tr>
           <th>Movie ID: </th>
           <th>Rating: </th>
@@ -43,22 +40,18 @@ function App() {
           return (
             <tr key={key}>
               <td>{val.movie}</td>
-              <td><input
-                      type="text"
-                      value={val.rating}
-                    /></td>
+              <td><input type="text" value={val.rating}/></td>
               <td>{val.review}</td>
               <td><button onClick={() => handleRemove(val.id)}>Delete!</button></td>
             </tr>
-          )
+          );
         })}
         <button onClick={() => alert('Save Succesful!')}>Save Changes</button>
-      </table> }
+      </table>
     </div>
   );
 }
 
 ReactDOM.render(<handleRating />, document.getElementById('root'));
 
-
-export default App
+export default App;
