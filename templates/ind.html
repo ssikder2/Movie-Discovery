@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>{{movie["title"]}}</h1>
+            <img src="https://image.tmdb.org/t/p/original/{{movie['poster_path']}}">
+            <h2>{{movie["tagline"]}}</h2>
+            <br>
+            <h3>
+                {% for genre in movie["genres"] %}
+                    {{genre["name"]}}
+                {% endfor %}
+            </h3>
+            <br>
+            <a href="https://en.wikipedia.org/?curid={{wiki['query']['pages'][0]['pageid']}}" class="button">Wikipedia</a>
+            <h2>Movie Reviews:</h2><br>
+            {% for i in reviews %}
+                {% if i.movie == movie["title"] %}
+                    By: {{i.user}} <br>
+                    Rating: {{i.rating}}/10 <br>
+                    {{i.review}}<br><br>
+                {% endif %}
+            {% endfor %}
+            <br>
+            <form action="/review" Method="POST">
+                <label for="user">Username:</label>
+                <input type="text" name="user" value="{{current_user.username}}" readonly><br>
+                <label for="movie_name">Movie Title:</label>
+                <input type="text" name="movie_name" value="{{movie['title']}}" readonly><br>
+                <label for="rating">Rating 1-10:</label>
+                <input type="text" name="rating"><br>
+                Review: <br />
+                <textarea rows = "5" cols = "50" name="review"></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+            <br>
+            <a href="http://localhost:3000/" class="button">Edit Ratings</a><br>
+            <a href="/logout">Log out</a>
+        </div>
+    </body>
+</html>

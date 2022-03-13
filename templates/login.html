@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <h1>Login!</h1>
+    </head>
+    <body>
+        {% for field, errors in form.errors.items() %}
+            {{ ', '.join(errors) }}
+        {% endfor %}
+        <form action="" Method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.username }}<br>
+            {{ form.password }}
+            {{ form.submit }}
+        </form>
+        <a href="/signup">Sign Up!</a>
+    </body>
+</html>

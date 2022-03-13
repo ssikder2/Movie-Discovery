@@ -1,0 +1,10 @@
+Flask
+requests
+python-dotenv
+flask_login
+flask_wtf
+flask_bcrypt
+wtforms 
+email_validator
+psycopg2-binary
+Flask-SQLAlchemy==2.1
